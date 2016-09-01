@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="task-1.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        var lib = solve(),
+        firstBook = {},
+        secondBook = {};
+
+        firstBook.title = 'Some title';
+        firstBook.isbn = 1111111111;
+        firstBook.author = 'Some author';
+        firstBook.category = 'Some category';
+
+        lib.books.add(firstBook);
+
+        secondBook.title = 'Some other title';
+        secondBook.isbn = 2222222222;
+        secondBook.author = 'Some other author';
+        secondBook.category = 'Some category';
+
+        lib.books.add(secondBook);
+
+        var booksList = lib.books.list();
+        var categoryList = lib.books.list(firstBook);
+        categoryList = lib.books.list(secondBook);
+        categoryList = lib.books.list({});
+
+    </script>
+</body>
+</html>
