@@ -29,6 +29,44 @@ class LinkedList {
     constructor() {
         this._length = 0;
         this._head = null;
+        this[Symbol.iterator] = function () {
+            let count = 0,
+                isDone = false, // set to true when the loop is done
+                self = this;
+
+            // define the next method, need for iterator
+            let next = function () {
+                // control on last property reach
+                if (count >= self._length) {
+                    isDone = true;
+                }
+
+                return {
+                    done: isDone,
+                    value: (function () {
+                        var i,
+                            currentNode;
+
+                        currentNode = self._head;
+                        for (i = 0; i < count; i += 1) {
+                            currentNode = currentNode.next;
+                        }
+                        count++;
+
+                        if (currentNode) {
+                            return currentNode.data;
+                        } else {
+                            return null;
+                        }
+                    }())
+                };
+            };
+
+            // return the next method used to iterate
+            return {
+                next
+            };
+        };
 
         return this;
     }

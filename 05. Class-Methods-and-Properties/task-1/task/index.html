@@ -7,18 +7,12 @@
 <body>
     <script src="task-1.js" charset="utf-8"></script>
     <script type="text/javascript">
-    const values = 'babel src --presets es2015 --out-dir ./build -s -w'.split(' '),
-        list = new LinkedList().append(...values),
-        listLength = list.length;
+    const values = [5, 6, 38],
+        list = new LinkedList().append(...values);
 
-    for (let i = 0, length = values.length; i < length; i += 1) {
-        list.at(i, i);
-        console.log(list.at(i));;
+    for (const val of list) {
+        console.log(values.indexOf(val));
     }
-
-        console.log(list.first);
-        console.log(list.last);
-        console.log(list.length);
     </script>
 </body>
 </html>
