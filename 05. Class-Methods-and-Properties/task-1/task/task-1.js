@@ -10,6 +10,10 @@ class listNode {
         return this._data;
     }
 
+    set data(value) {
+        this._data = value;
+    }
+
     get next() {
         return this._next;
     }
@@ -162,6 +166,27 @@ class LinkedList {
         }
 
         return this;
+    }
+
+    at(index, value) {
+        var nodeAtIndex,
+            i;
+
+        if (index < 0 || index > this._length - 1) {
+            return this;
+        }
+
+        nodeAtIndex = this._head;
+        for (i = 0; i < index; i += 1) {
+            nodeAtIndex = nodeAtIndex.next;
+        }
+
+        if (!value) {
+            return nodeAtIndex.data;
+        } else {
+            nodeAtIndex.data = value;
+            return this;
+        }
     }
 
     toString() {
