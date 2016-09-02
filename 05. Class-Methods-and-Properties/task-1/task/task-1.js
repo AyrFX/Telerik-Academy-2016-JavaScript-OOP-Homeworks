@@ -135,6 +135,10 @@ class LinkedList {
             parentNode = nodeAtIndex;
             nodeAtIndex = nodeAtIndex.next;
         }
+        if (index === this._length - 1) {
+            parentNode = nodeAtIndex;
+            nodeAtIndex = nodeAtIndex.next;
+        }
 
         this._length += 1;
         for (i = 1; i < nodes.length; i += 1) {
