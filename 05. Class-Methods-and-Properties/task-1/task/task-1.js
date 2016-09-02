@@ -210,6 +210,19 @@ class LinkedList {
         return nodeAtIndex.data;
     }
 
+    toArray() {
+        var array = [],
+            currentNode;
+
+        currentNode = this._head;
+        while (currentNode !== null) {
+            array.push(currentNode.data);
+            currentNode = currentNode.next;
+        }
+
+        return array;
+    }
+
     toString() {
         var currentNode = this._head,
             result = '';
