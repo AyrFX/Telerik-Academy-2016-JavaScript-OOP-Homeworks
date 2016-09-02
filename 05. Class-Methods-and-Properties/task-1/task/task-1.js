@@ -102,7 +102,7 @@ class LinkedList {
         if (this._length === 0) {
             return this.insert(0, ...nodes);
         } else {
-            return this.insert(this._length - 1, ...nodes);
+            return this.insert(this._length, ...nodes);
         }
     }
 
@@ -136,7 +136,7 @@ class LinkedList {
             lastNode = firstNode,
             parentNode;
 
-        if ((0 > index || index > this._length - 1) && (index !== 0)) {
+        if ((0 > index || index > this._length) && (index !== 0)) {
             return this;
         }
 
@@ -145,10 +145,10 @@ class LinkedList {
             parentNode = nodeAtIndex;
             nodeAtIndex = nodeAtIndex.next;
         }
-        if (index === this._length - 1) {
+        /*if (index === this._length - 1) {
             parentNode = nodeAtIndex;
             nodeAtIndex = nodeAtIndex.next;
-        }
+        }*/
 
         this._length += 1;
         for (i = 1; i < nodes.length; i += 1) {
@@ -187,6 +187,31 @@ class LinkedList {
             nodeAtIndex.data = value;
             return this;
         }
+    }
+
+    removeAt(index) {
+        var i,
+            nodeAtIndex,
+            parentNode;
+
+        if (index < 0 || index > this._length) {
+            return undefined;
+        }
+
+        nodeAtIndex = this._head;
+        for (i = 0; i < index; i += 1) {
+            parentNode = nodeAtIndex;
+            nodeAtIndex = nodeAtIndex.next;
+        }
+        if (index === 0) {
+            this._head = nodeAtIndex.next;
+            this._length -= 1;
+            return nodeAtIndex.data;
+        }
+
+        parentNode.next = nodeAtIndex.next;
+        this._length -= 1;
+        return nodeAtIndex.data;
     }
 
     toString() {
