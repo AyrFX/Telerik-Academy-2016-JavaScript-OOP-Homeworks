@@ -70,7 +70,7 @@ class LinkedList {
 
     //methods
     append(...nodes) {
-        var lastNode = this.lastNode,
+        /*var lastNode = this.lastNode,
             newNode,
             i;
 
@@ -93,7 +93,13 @@ class LinkedList {
             }
         }
 
-        return this;
+        return this;*/
+
+        if (this._length === 0) {
+            return this.insert(0, ...nodes);
+        } else {
+            return this.insert(this._length - 1, ...nodes);
+        }
     }
 
     prepend(...nodes) {
@@ -126,7 +132,7 @@ class LinkedList {
             lastNode = firstNode,
             parentNode;
 
-        if (0 > index || index > this._length - 1) {
+        if ((0 > index || index > this._length - 1) && (index !== 0)) {
             return this;
         }
 
