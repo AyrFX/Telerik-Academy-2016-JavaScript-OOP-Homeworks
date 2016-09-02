@@ -97,7 +97,7 @@ class LinkedList {
     }
 
     prepend(...nodes) {
-        var firstNode = new listNode(nodes[0]),
+        /*var firstNode = new listNode(nodes[0]),
             newNode,
             lastNode = firstNode,
             i;
@@ -112,7 +112,44 @@ class LinkedList {
         }
 
         lastNode.next = this._head;
-        this._head = firstNode;
+        this._head = firstNode;*/
+        return this.insert(0, ...nodes);
+
+        //return this;
+    }
+
+    insert(index, ...nodes) {
+        var i,
+            nodeAtIndex,
+            firstNode = new listNode(nodes[0]),
+            newNode,
+            lastNode = firstNode,
+            parentNode;
+
+        if (0 > index || index > this._length - 1) {
+            return this;
+        }
+
+        nodeAtIndex = this._head;
+        for (i = 0; i < index; i += 1) {
+            parentNode = nodeAtIndex;
+            nodeAtIndex = nodeAtIndex.next;
+        }
+
+        this._length += 1;
+        for (i = 1; i < nodes.length; i += 1) {
+            newNode = new listNode(nodes[i]);
+            lastNode.next = newNode;
+            lastNode = newNode;
+            this._length += 1;
+        }
+
+        lastNode.next = nodeAtIndex;
+        if (parentNode) {
+            parentNode.next = firstNode;
+        } else {
+            this._head = firstNode;
+        }
 
         return this;
     }
