@@ -96,9 +96,29 @@ class LinkedList {
         return this;
     }
 
+    prepend(...nodes) {
+        var firstNode = new listNode(nodes[0]),
+            newNode,
+            lastNode = firstNode,
+            i;
+
+        this._length += 1;
+
+        for (i = 1; i < nodes.length; i += 1) {
+            newNode = new listNode(nodes[i]);
+            lastNode.next = newNode;
+            lastNode = newNode;
+            this._length += 1;
+        }
+
+        lastNode.next = this._head;
+        this._head = firstNode;
+
+        return this;
+    }
+
     toString() {
-        var i,
-            currentNode = this._head,
+        var currentNode = this._head,
             result = '';
 
         if (currentNode === null) {
