@@ -145,10 +145,6 @@ class LinkedList {
             parentNode = nodeAtIndex;
             nodeAtIndex = nodeAtIndex.next;
         }
-        /*if (index === this._length - 1) {
-            parentNode = nodeAtIndex;
-            nodeAtIndex = nodeAtIndex.next;
-        }*/
 
         this._length += 1;
         for (i = 1; i < nodes.length; i += 1) {
@@ -181,7 +177,7 @@ class LinkedList {
             nodeAtIndex = nodeAtIndex.next;
         }
 
-        if (!value) {
+        if (value === undefined) {
             return nodeAtIndex.data;
         } else {
             nodeAtIndex.data = value;
