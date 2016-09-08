@@ -70,12 +70,38 @@ function solve() {
 			}
 			this.presentations = presentations;
 		},
-		addStudent: function (name) {},
+		addStudent: function (name) {
+			if (typeof name != 'string') {
+				throw 'The name of the student must be a string!';
+			}
+			if (name.split(' ').length !== 2) {
+				throw 'The student should have two names exactly!';
+			}
+			checkNames(name);
+		},
 		getAllStudents: function () {},
 		submitHomework: function (studentID, homeworkID) {},
 		pushExamResults: function (results) {},
 		getTopStudents: function () {}
 	};
+
+	function checkNames(name) {
+		let names = name.split(' '),
+			i,
+			j;
+
+		for (i = 0; i < names.length; i += 1) {
+			if (names[i].charCodeAt(0) < 65 || names[i].charCodeAt(0) > 90) {
+				throw 'The names of the student should begin with capital letter!';
+			}
+			for (j = 1; j < names[i].length; j += 1) {
+				if (names[i].charCodeAt(j) < 97 || names[i].charCodeAt(j) > 122) {
+					throw 'All letters of each name except the first can be only small letters!';
+				}
+			}
+		}
+
+	}
 
 	return Course;
 }
