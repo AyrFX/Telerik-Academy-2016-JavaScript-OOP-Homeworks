@@ -45,6 +45,10 @@
  */
 
 function solve() {
+	let studentIdCounter = 0,
+		homeworkIdCounter = 0,
+		coursePresentations = [],
+		courseStudents = [];
 	var Course = {
 		init: function (title, presentations) {
 			let i;
@@ -68,7 +72,7 @@ function solve() {
 					throw 'The title of the presentation can not contain consecutive spaces!';
 				}
 			}
-			this.presentations = presentations;
+			coursePresentations = presentations;
 		},
 		addStudent: function (name) {
 			if (typeof name != 'string') {
@@ -78,9 +82,31 @@ function solve() {
 				throw 'The student should have two names exactly!';
 			}
 			checkNames(name);
+			studentIdCounter++;
+			let firstName = name.split(' ')[0],
+				lastName = name.split(' ')[1];
+			courseStudents.push({
+				firstName: firstName,
+				lastName: lastName,
+				id: studentIdCounter
+			});
+			return studentIdCounter;
 		},
-		getAllStudents: function () {},
-		submitHomework: function (studentID, homeworkID) {},
+		getAllStudents: function () {
+			return courseStudents;
+		},
+		submitHomework: function (studentID, homeworkID) {
+			if (studentID < 1 || studentID > studentIdCounter) {
+				throw 'Invalid student ID!';
+			}
+			if (studentID % 1 !== 0) {
+				throw 'The student ID should be a integer!';
+			}
+
+			if (homeworkID < 1 || homeworkID > coursePresentations.length) {
+				throw 'Invalid Homework ID!';
+			}
+		},
 		pushExamResults: function (results) {},
 		getTopStudents: function () {}
 	};
