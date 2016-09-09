@@ -93,21 +93,49 @@ function solve() {
 			return studentIdCounter;
 		},
 		getAllStudents: function () {
-			return courseStudents;
+			return courseStudents.slice();
 		},
 		submitHomework: function (studentID, homeworkID) {
-			if (studentID < 1 || studentID > studentIdCounter) {
-				throw 'Invalid student ID!';
-			}
-			if (studentID % 1 !== 0) {
-				throw 'The student ID should be a integer!';
-			}
+			checkStudentId(studentID);
 
 			if (homeworkID < 1 || homeworkID > coursePresentations.length) {
 				throw 'Invalid Homework ID!';
 			}
 		},
-		pushExamResults: function (results) {},
+		pushExamResults: function (results) {
+			let i,
+				hasScore,
+				studentIDs = [];
+
+			if (arguments.length < 1 || results.length < 1) {
+				throw 'No results given!';
+			}
+			if (!Array.isArray(results)) {
+				throw 'The results should be an array!';
+			}
+			for (i = 0; i < results.length; i += 1) {
+				hasScore = false;
+				for (let key in results[i]) {
+					if (key == 'StudentID') {
+						checkStudentId(results[i][key]);
+					}
+					if (key === 'score') {
+						hasScore = true;
+						if (typeof results[i][key] !== 'number') {
+							throw 'Not all scores are numbers!';
+						}
+					}
+				}
+				if (!hasScore) {
+					throw 'Not all students have score!';
+				}
+
+				if (studentIDs.indexOf(results[i].StudentID) > -1) {
+					throw 'There is student duplicated!';
+				}
+				studentIDs.push(results[i].StudentID);
+			}
+		},
 		getTopStudents: function () {}
 	};
 
@@ -127,6 +155,15 @@ function solve() {
 			}
 		}
 
+	}
+
+	function checkStudentId(studentID) {
+		if (studentID < 1 || studentID > studentIdCounter) {
+			throw 'Invalid student ID!';
+		}
+		if (studentID % 1 !== 0) {
+			throw 'The student ID should be a integer!';
+		}
 	}
 
 	return Course;

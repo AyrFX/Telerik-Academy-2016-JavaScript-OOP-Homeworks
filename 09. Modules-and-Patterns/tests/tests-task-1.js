@@ -37,7 +37,8 @@ describe('Test for Modules and Patterns in JavaScript', function () {
                 var jsoop = Object.create(Course);
                 jsoop.init(getValidTitle(), [
                     getValidTitle(),
-                    '']);
+                    ''
+                ]);
             }
 
             expect(test).to.throw();
@@ -160,15 +161,16 @@ describe('Test for Modules and Patterns in JavaScript', function () {
 
             expect(test).to.not.throw();
         });
-        it('expect not to throw when a student name is valid (a name consists of a single letter)', function () {
-            function test() {
-                var jsoop = Object.create(Course);
-                jsoop.init(getValidTitle(), [getValidTitle()]);
-                jsoop.addStudent(getValidName() + ' K');
-            }
+        it('expect not to throw when a student name is valid (a name consists of a single letter)',
+            function () {
+                function test() {
+                    var jsoop = Object.create(Course);
+                    jsoop.init(getValidTitle(), [getValidTitle()]);
+                    jsoop.addStudent(getValidName() + ' K');
+                }
 
-            expect(test).to.not.throw();
-        });
+                expect(test).to.not.throw();
+            });
     });
 
     describe('ID checks', function () {
@@ -184,8 +186,7 @@ describe('Test for Modules and Patterns in JavaScript', function () {
                 for (i in ids) {
                     if (ids[i] > 0 && ids[i] === (ids[i] | 0)) {
                         /* It's OK */
-                    }
-                    else return false;
+                    } else return false;
                 }
                 return true;
             }();
@@ -273,13 +274,13 @@ describe('Test for Modules and Patterns in JavaScript', function () {
 
     describe('Getting students', function () {
         it('expect getAllStudents to return an array of the listed students (no students)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
             expect(jsoop.getAllStudents()).to.be.eql([]);
         });
         it('expect getAllStudents to return an array of the listed students (one student)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
 
             var student = {
                 firstname: getValidName(),
@@ -290,8 +291,8 @@ describe('Test for Modules and Patterns in JavaScript', function () {
             expect(checkStudentList([student], jsoop.getAllStudents())).to.be.true;
         });
         it('expect getAllStudents to return an array of the listed students (many students)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
 
             var firstname, lastname, listed = [];
             for (var i = 0; i < 100; ++i) {
@@ -310,8 +311,8 @@ describe('Test for Modules and Patterns in JavaScript', function () {
 
     describe('Pushing Exam Results', function () {
         it('expect pushExamResults to throw if given invalid scores (no arguments given)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
 
             function test() {
                 jsoop.pushExamResults()
@@ -319,99 +320,148 @@ describe('Test for Modules and Patterns in JavaScript', function () {
 
             expect(test).to.throw();
         });
-        it('expect pushExamResults to throw if given invalid scores (given string, not array)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+        it('expect pushExamResults to throw if given invalid scores (given string, not array)',
+            function () {
+                var jsoop = Object.create(Course)
+                    .init(getValidTitle(), [getValidTitle()]);
 
-            function test() {
-                jsoop.pushExamResults('StudentID:1 score:4')
-            }
+                function test() {
+                    jsoop.pushExamResults('StudentID:1 score:4')
+                }
 
-            expect(test).to.throw();
-        });
-        it('expect pushExamResults to throw if given invalid scores (given object, not array)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+                expect(test).to.throw();
+            });
+        it('expect pushExamResults to throw if given invalid scores (given object, not array)',
+            function () {
+                var jsoop = Object.create(Course)
+                    .init(getValidTitle(), [getValidTitle()]);
 
-            function test() {
-                jsoop.pushExamResults({StudentID: 1, score: 4})
-            }
+                function test() {
+                    jsoop.pushExamResults({
+                        StudentID: 1,
+                        score: 4
+                    })
+                }
 
-            expect(test).to.throw();
-        });
-        it('expect pushExamResults to throw if given invalid scores (no score given for a student)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
-            jsoop.addStudent(getValidName() + ' ' + getValidName());
-            jsoop.addStudent(getValidName() + ' ' + getValidName());
+                expect(test).to.throw();
+            });
+        it('expect pushExamResults to throw if given invalid scores (no score given for a student)',
+            function () {
+                var jsoop = Object.create(Course);
+                jsoop.init(getValidTitle(), [getValidTitle()]);
+                jsoop.addStudent(getValidName() + ' ' + getValidName());
+                jsoop.addStudent(getValidName() + ' ' + getValidName());
 
-            function test() {
-                jsoop.pushExamResults([{StudentID: 1, score: 4}, {StudentID: 2}])
-            }
+                function test() {
+                    jsoop.pushExamResults([{
+                        StudentID: 1,
+                        score: 4
+                    }, {
+                        StudentID: 2
+                    }])
+                }
 
-            expect(test).to.throw();
-        });
+                expect(test).to.throw();
+            });
         it('expect pushExamResults to throw if given invalid scores (same student twice)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
             jsoop.addStudent(getValidName() + ' ' + getValidName());
             jsoop.addStudent(getValidName() + ' ' + getValidName());
 
             function test() {
-                jsoop.pushExamResults([{StudentID: 1, score: 4}, {StudentID: 1, score: 5}])
+                jsoop.pushExamResults([{
+                    StudentID: 1,
+                    score: 4
+                }, {
+                    StudentID: 1,
+                    score: 5
+                }])
             }
 
             expect(test).to.throw();
         });
         it('expect pushExamResults to throw if given invalid scores (score is not a Number)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
 
             function test() {
-                jsoop.pushExamResults([{StudentID: 1, score: 'A+'}, {StudentID: 2, score: 5}])
+                jsoop.pushExamResults([{
+                    StudentID: 1,
+                    score: 'A+'
+                }, {
+                    StudentID: 2,
+                    score: 5
+                }])
             }
 
             expect(test).to.throw();
         });
-        it('expect pushExamResults to throw if given invalid scores (id < first student\'s number)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+        it('expect pushExamResults to throw if given invalid scores (id < first student\'s number)',
+            function () {
+                var jsoop = Object.create(Course)
+                    .init(getValidTitle(), [getValidTitle()]);
 
-            function test() {
-                jsoop.pushExamResults([{StudentID: 0, score: 3}, {StudentID: 1, score: 5}])
-            }
+                function test() {
+                    jsoop.pushExamResults([{
+                        StudentID: 0,
+                        score: 3
+                    }, {
+                        StudentID: 1,
+                        score: 5
+                    }])
+                }
 
-            expect(test).to.throw();
-        });
+                expect(test).to.throw();
+            });
         it('expect pushExamResults to throw if given invalid scores (id > students number)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
             var id = jsoop.addStudent(getValidName() + ' ' + getValidName());
 
             function test() {
-                jsoop.pushExamResults([{StudentID: id + 5, score: 3}, {StudentID: 1, score: 5}])
+                jsoop.pushExamResults([{
+                    StudentID: id + 5,
+                    score: 3
+                }, {
+                    StudentID: 1,
+                    score: 5
+                }])
             }
 
             expect(test).to.throw();
         });
         it('expect pushExamResults to throw if given invalid scores(id is not a number)', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
             var id = jsoop.addStudent(getValidName() + ' ' + getValidName());
 
             function test() {
-                jsoop.pushExamResults([{StudentID: 'pesho', score: 3}, {StudentID: 1, score: 5}])
+                jsoop.pushExamResults([{
+                    StudentID: 'pesho',
+                    score: 3
+                }, {
+                    StudentID: 1,
+                    score: 5
+                }])
             }
 
             expect(test).to.throw();
         });
         it('expect pushExamResults to not throw if given valid students and scores', function () {
-            var jsoop = Object.create(Course)
-                .init(getValidTitle(), [getValidTitle()]);
+            var jsoop = Object.create(Course);
+            jsoop.init(getValidTitle(), [getValidTitle()]);
             jsoop.addStudent(getValidName() + ' ' + getValidName());
             jsoop.addStudent(getValidName() + ' ' + getValidName());
+
             function test() {
-                jsoop.pushExamResults([{StudentID: 1, score: 4}, {StudentID: 2, score: 5}])
+                jsoop.pushExamResults([{
+                    StudentID: 1,
+                    score: 4
+                }, {
+                    StudentID: 2,
+                    score: 5
+                }])
             }
 
             expect(test).to.not.throw();
@@ -420,39 +470,41 @@ describe('Test for Modules and Patterns in JavaScript', function () {
 });
 
 var validTitles = [
-    'Modules and Patterns',
-    'Ofcourse, this is a valid title!',
-    'No errors hIr.',
-    'Moar taitles',
-    'Businessmen arrested for harassment of rockers',
-    'Miners handed cabbages to the delight of children',
-    'Dealer stole Moskvitch',
-    'Shepherds huddle',
-    'Retired Officers rally',
-    'Moulds detonate tunnel',
-    'sailors furious'
-], validNames = [
-    'Pesho',
-    'Notaname',
-    'Johny',
-    'Marulq',
-    'Keremidena',
-    'Samomidena',
-    'Medlar',
-    'Yglomer',
-    'Elegant',
-    'Analogical',
-    'Bolsheviks',
-    'Reddish',
-    'Arbitrage',
-    'Toyed',
-    'Willfully',
-    'Transcribing'
-];
+        'Modules and Patterns',
+        'Ofcourse, this is a valid title!',
+        'No errors hIr.',
+        'Moar taitles',
+        'Businessmen arrested for harassment of rockers',
+        'Miners handed cabbages to the delight of children',
+        'Dealer stole Moskvitch',
+        'Shepherds huddle',
+        'Retired Officers rally',
+        'Moulds detonate tunnel',
+        'sailors furious'
+    ],
+    validNames = [
+        'Pesho',
+        'Notaname',
+        'Johny',
+        'Marulq',
+        'Keremidena',
+        'Samomidena',
+        'Medlar',
+        'Yglomer',
+        'Elegant',
+        'Analogical',
+        'Bolsheviks',
+        'Reddish',
+        'Arbitrage',
+        'Toyed',
+        'Willfully',
+        'Transcribing'
+    ];
 
 function getValidTitle() {
     return validTitles[(Math.random() * validTitles.length) | 0];
 }
+
 function getValidName() {
     return validNames[(Math.random() * validNames.length) | 0];
 }
