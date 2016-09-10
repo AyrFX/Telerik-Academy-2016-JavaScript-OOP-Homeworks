@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="solution.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        var name,
+            isbn,
+            genre,
+            description,
+            book,
+            i,
+            ids,
+            count,
+            result = solve();
+
+        console.log(result.getBook == undefined); //expect(result.getBook).to.exist;
+        console.log(typeof result.getBook); //expect(result.getBook).to.be.a('function');
+
+        name = 'Valid name';
+        isbn = '1231231234';
+        genre = 'ValidGenre';
+        description = '...some description...';
+
+        book = result.getBook(name, undefined, genre, description);
+        // book = result.getBook(name, isbn, genre, description);
+        // console.log(book);//expect(book).to.be.a('object');
+        // console.log(typeof book.name); //expect(book.name).to.be.a('string');
+        // console.log (name == book.name);//expect(book.name).to.equal(name);
+        //
+        // console.log(typeof book.isbn);// expect(book.isbn).to.be.a('string');
+        // console.log(book.isbn == isbn);// expect(book.isbn).to.equal(isbn);
+        //
+        // console.log(typeof book.genre);// expect(book.genre).to.be.a('string');
+        // console.log(book.genre == genre);// expect(book.genre).to.equal(genre);
+        //
+        // expect(book.description).to.be.a('string');
+        // expect(book.description).to.equal(description);
+        //
+        // expect(book.id).to.be.a('number');
+        // i = 0;
+        // count = 10000;
+        // ids = {};
+        // while (i !== count) {
+        //     book = result.getBook(name, isbn, genre, description);
+        //     expect(ids[book.id]).to.be.undefined;
+        //     ids[book.id] = 1;
+        //     i += 1;
+        // }
+    </script>
+</body>
+</html>
