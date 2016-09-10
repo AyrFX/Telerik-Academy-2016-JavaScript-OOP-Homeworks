@@ -831,7 +831,7 @@ describe('Academy Catalogs', function () {
             // test 11
             beforeEach(function (done) {
                 //     result = require("../tasks/solution-es2015-doncho")();
-                result = require("../tasks/solution-es2015-doncho")();
+                result = require("../tasks/solution")();
                 done();
             });
             it(
@@ -1178,7 +1178,7 @@ describe('Academy Catalogs', function () {
         describe('Invalid tests', function () {
             // test 18
             beforeEach(function (done) {
-                result = require("../tasks/solution-es2015-doncho")();
+                result = require("../tasks/solution")();
                 done();
             });
             it(
@@ -1332,7 +1332,7 @@ describe('Academy Catalogs', function () {
         describe('Valid tests', function () {
             // test 21
             beforeEach(function (done) {
-                result = require("../tasks/solution-es2015-doncho")();
+                result = require("../tasks/solution")();
                 done();
             });
             it(
@@ -1697,7 +1697,7 @@ describe('Academy Catalogs', function () {
         describe('Invalid tests', function () {
             // test 28
             beforeEach(function (done) {
-                result = require("../tasks/solution-es2015-doncho")();
+                result = require("../tasks/solution")();
                 done();
             });
             it(
